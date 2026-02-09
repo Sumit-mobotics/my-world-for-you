@@ -2,21 +2,17 @@ import { motion } from "framer-motion";
 import loveLetter from "@/assets/love-letter.png";
 
 const LoveLetterSection = () => {
-  const letterText = `My Dearest Love,
+  const paragraphs = [
+    "My Dearest Love,",
+    "From the moment you came into my life, everything changed for the better. You are my sunshine on cloudy days, my calm in every storm, and the reason behind my happiest smiles.",
+    "Every day with you feels like a beautiful dream I never want to wake up from. You make my heart skip a beat with just one look, and I find myself falling deeper in love with you every single day.",
+    "You mean the world to me — no, you ARE my world. I cannot imagine a life without your warmth, your laughter, your love. You complete me in ways I never knew I needed.",
+    "Thank you for being you. Thank you for choosing me. Thank you for making every moment magical.",
+    "I love you more than words could ever express, today, tomorrow, and forever.",
+    "Forever yours ❤️",
+  ];
 
-From the moment you came into my life, everything changed for the better. You are my sunshine on cloudy days, my calm in every storm, and the reason behind my happiest smiles.
-
-Every day with you feels like a beautiful dream I never want to wake up from. You make my heart skip a beat with just one look, and I find myself falling deeper in love with you every single day.
-
-You mean the world to me — no, you ARE my world. I cannot imagine a life without your warmth, your laughter, your love. You complete me in ways I never knew I needed.
-
-Thank you for being you. Thank you for choosing me. Thank you for making every moment magical.
-
-I love you more than words could ever express, today, tomorrow, and forever.
-
-Forever yours ❤️`;
-
-  const words = letterText.split(" ");
+  let wordIndex = 0;
 
   return (
     <section className="relative py-24 px-4 overflow-hidden">
@@ -68,23 +64,32 @@ Forever yours ❤️`;
           <div className="absolute bottom-4 left-4 text-primary/20 text-2xl animate-heart-beat" style={{ animationDelay: "1s" }}>♥</div>
           <div className="absolute bottom-4 right-4 text-primary/20 text-2xl animate-heart-beat" style={{ animationDelay: "1.5s" }}>♥</div>
 
-          <motion.div className="text-left font-body text-foreground/90 leading-loose text-base sm:text-lg whitespace-pre-line">
-            {words.map((word, index) => (
-              <motion.span
-                key={index}
-                className="inline-block mr-1"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.05,
-                  delay: index * 0.02,
-                }}
-              >
-                {word}{" "}
-              </motion.span>
-            ))}
-          </motion.div>
+          <div className="text-left font-body text-foreground/90 leading-loose text-base sm:text-lg space-y-4">
+            {paragraphs.map((paragraph, pIndex) => {
+              const words = paragraph.split(" ");
+              const startIndex = wordIndex;
+              wordIndex += words.length;
+              return (
+                <p key={pIndex}>
+                  {words.map((word, wIndex) => (
+                    <motion.span
+                      key={wIndex}
+                      className="inline mr-[0.25em]"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.05,
+                        delay: (startIndex + wIndex) * 0.02,
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </p>
+              );
+            })}
+          </div>
         </motion.div>
       </motion.div>
     </section>
