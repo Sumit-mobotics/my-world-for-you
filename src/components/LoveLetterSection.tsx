@@ -64,17 +64,17 @@ const LoveLetterSection = () => {
           <div className="absolute bottom-4 left-4 text-primary/20 text-2xl animate-heart-beat" style={{ animationDelay: "1s" }}>♥</div>
           <div className="absolute bottom-4 right-4 text-primary/20 text-2xl animate-heart-beat" style={{ animationDelay: "1.5s" }}>♥</div>
 
-          <div className="text-left font-body text-foreground/90 leading-loose text-base sm:text-lg space-y-4">
+          <div className="text-left font-body text-foreground/90 leading-loose text-base sm:text-lg space-y-4 overflow-hidden break-words">
             {paragraphs.map((paragraph, pIndex) => {
               const words = paragraph.split(" ");
               const startIndex = wordIndex;
               wordIndex += words.length;
               return (
-                <p key={pIndex}>
+                <p key={pIndex} className="flex flex-wrap">
                   {words.map((word, wIndex) => (
                     <motion.span
                       key={wIndex}
-                      className="inline mr-[0.25em]"
+                      className="mr-[0.3em]"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
